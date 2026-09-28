@@ -302,10 +302,10 @@ Panel {
   // Fixed absolute paths only (never PATH lookups): the interpreter, the
   // terminal launcher and wl-copy. `-I` keeps PYTHON* variables and the
   // user site directory out of the collector.
-  readonly property string pythonBin: "/usr/bin/python3"
-  readonly property string terminalBin: "/usr/bin/omarchy-launch-terminal"
-  readonly property string clipboardBin: "/usr/bin/wl-copy"
-  readonly property string notifyBin: "/usr/bin/notify-send"
+  readonly property string pythonBin: "/home/dc/.nix-profile/bin/python3"
+  readonly property string terminalBin: "/home/dc/.nix-profile/share/omarchy/bin/omarchy-launch-terminal"
+  readonly property string clipboardBin: "/home/dc/.nix-profile/bin/wl-copy"
+  readonly property string notifyBin: "/home/dc/.nix-profile/bin/notify-send"
   readonly property int maxDocumentChars: 8 * 1024 * 1024
 
   // Strings that end up in components we do not own (tooltips) go through

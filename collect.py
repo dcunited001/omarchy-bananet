@@ -107,17 +107,17 @@ SETUP = []
 # Nothing is resolved through PATH: a writable PATH entry must never be able to
 # redirect a command, least of all one that ends up in a sudoers rule.
 BIN = {
-    "ip": "/usr/bin/ip",
-    "nmcli": "/usr/bin/nmcli",
-    "resolvectl": "/usr/bin/resolvectl",
-    "ss": "/usr/bin/ss",
-    "pgrep": "/usr/bin/pgrep",
-    "tailscale": "/usr/bin/tailscale",
-    "zerotier-cli": "/usr/bin/zerotier-cli",
-    "wg": "/usr/bin/wg",
-    "openvpn": "/usr/bin/openvpn",
-    "ping": "/usr/bin/ping",
-    "sudo": "/usr/bin/sudo",
+    "ip": "/run/current-system/sw/bin/ip",
+    "nmcli": "/run/current-system/sw/bin/nmcli",
+    "resolvectl": "/run/current-system/sw/bin/resolvectl",
+    "ss": "/run/current-system/sw/bin/ss",
+    "pgrep": "/run/current-system/sw/bin/pgrep",
+    "tailscale": "/run/current-system/sw/bin/tailscale",
+    "zerotier-cli": "/run/current-system/sw/bin/zerotier-cli",
+    "wg": "/run/current-system/sw/bin/wg",
+    "openvpn": "/run/current-system/sw/bin/openvpn",
+    "ping": "/run/current-system/sw/bin/ping",
+    "sudo": "/run/current-system/sw/bin/sudo",
     "python3": "/usr/bin/python3",
 }
 SELF = os.path.realpath(__file__)
@@ -144,7 +144,7 @@ SUDO_RULES = {
 
 # Children never inherit the widget's environment: no BASH_ENV/PYTHON*/LD_* and
 # a fixed PATH (only used by the child for its own helpers; we exec by path).
-CLEAN_ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "HOME": HOME}
+CLEAN_ENV = {"PATH": "/run/current-system/sw/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "HOME": HOME}
 OUTPUT_MAX = 4 * 1024 * 1024   # stdout ceiling per child (ss/tailscale on a busy box is ~100 kB)
 STDERR_MAX = 64 * 1024
 CACHE_MAX = 1024 * 1024        # per JSON cache file
@@ -199,12 +199,12 @@ ROOT_INSTALLER = r'''
 import os, pwd, stat, subprocess, sys, tempfile
 
 RULES = {
-    "zerotier": ("BANANET_ZEROTIER", ("/usr/bin/zerotier-cli -j listnetworks", "/usr/bin/zerotier-cli -j listpeers")),
-    "wg": ("BANANET_WG", ("/usr/bin/wg show all dump",)),
-    "ss": ("BANANET_SS", ("/usr/bin/ss -tunpHO", "/usr/bin/ss -tulnpHO")),
+    "zerotier": ("BANANET_ZEROTIER", ("/run/current-system/sw/bin/zerotier-cli -j listnetworks", "/run/current-system/sw/bin/zerotier-cli -j listpeers")),
+    "wg": ("BANANET_WG", ("/run/current-system/sw/bin/wg show all dump",)),
+    "ss": ("BANANET_SS", ("/run/current-system/sw/bin/ss -tunpHO", "/run/current-system/sw/bin/ss -tulnpHO")),
 }
 SUDOERS_DIR = "/etc/sudoers.d"
-VISUDO = "/usr/bin/visudo"
+VISUDO = "/run/current-system/sw/bin/visudo"
 
 
 def die(msg):
