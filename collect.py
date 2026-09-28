@@ -316,6 +316,7 @@ def setup_command(name):
 def setup_card(name, title, detail, iface, minor=False):
     """Offer a sudoers rule only when every target is a trusted binary; otherwise
     say why instead."""
+    pass
     for vector in SUDO_RULES[name][1]:
         why = trusted_binary(vector[0])
         if why:
