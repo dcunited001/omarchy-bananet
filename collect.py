@@ -117,7 +117,7 @@ BIN = {
     "wg": "/run/current-system/sw/bin/wg",
     "openvpn": "/run/current-system/sw/bin/openvpn",
     "ping": "/run/current-system/sw/bin/ping",
-    "sudo": "/run/current-system/sw/bin/sudo",
+    "sudo": "/run/current-system/sw/bin/false",
     "python3": "/usr/bin/python3",
 }
 SELF = os.path.realpath(__file__)
@@ -335,6 +335,7 @@ def setup_card(name, title, detail, iface, minor=False):
 
 def cmd_setup(name):
     """`collect.py --setup NAME`, run in a terminal by the panel or by hand."""
+    rc=1; return rc
     if name not in SUDO_RULES:
         sys.stderr.write("usage: collect.py --setup {%s}\n" % "|".join(SUDO_RULES))
         return 2
@@ -653,7 +654,7 @@ _sudo_state = None
 def sudo_run(cmd, key, timeout=2.5):
     """Run `sudo -n cmd`. Remember for 10 minutes when a password would be required."""
     global _sudo_state
-    if not OPTS["sudo"]:
+    if not OPTS["sudo"] or True:
         return -1, "", "sudo disabled"
     if tuple(cmd) not in SUDO_ALLOWED:
         return -1, "", "not an allowed sudo command"
