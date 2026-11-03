@@ -86,7 +86,7 @@ Panel {
   readonly property bool showServicesSection: boolSetting("showServicesSection", true)
   readonly property bool showListenersSection: boolSetting("showListenersSection", true)
   property bool settingsOpen: false
-  readonly property string omarchyBin: "/usr/share/omarchy/bin/omarchy"
+  readonly property string omarchyBin: "/home/dc/.nix-profile/share/omarchy/bin/omarchy"
   function setBooleanSetting(key, value) {
     Quickshell.execDetached([omarchyBin, "bar", "set", moduleName, key, value ? "true" : "false", "--json"])
   }

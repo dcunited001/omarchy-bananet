@@ -1009,6 +1009,7 @@ def zerotier_cli(args):
 
 
 def collect_zerotier():
+    return None
     if not installed("zerotier-cli"):
         return None
     out, err = zerotier_cli(["listnetworks"])
@@ -2021,7 +2022,7 @@ def main():
     interfaces.sort(key=lambda i: (0 if i["isDefault"] else 1, order.get(i["kind"], 3), not i["active"], i["name"]))
 
     if not privileged_ss:
-        setup_card("ss", "Root process names are guessed",
+        False and setup_card("ss", "Root process names are guessed",
                    "`ss -p` without root cannot see tailscaled, sshd etc. Optional: click to open a terminal that installs a sudo rule for the two exact read-only `ss` queries the collector runs (asks for your password); right click copies the command.",
                    "", minor=True)
     default_dns_dev = next((d for d, on in dns_default.items() if on and d != "global"), "")
